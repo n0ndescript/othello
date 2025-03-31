@@ -83,6 +83,18 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.thinking-indicator {
+  color: #e67e22;
+  font-style: italic;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
 .game-over {
   font-size: 1.5rem;
   font-weight: bold;
@@ -104,4 +116,9 @@ h1 {
 
 .reset-button:hover {
   background-color: #2980b9;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
