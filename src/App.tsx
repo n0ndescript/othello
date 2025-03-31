@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { GameBoard } from './components/GameBoard'
 import { GameSettings } from './components/GameSettings'
-import { GameState, Player, Position, GameMode, Difficulty } from './types/game'
+import { GameState, Player, Position, GameMode } from './types/game'
 import {
   createInitialBoard,
   makeMove,
@@ -10,7 +10,7 @@ import {
   getWinner,
   getValidMoves,
 } from './utils/gameLogic'
-import { getComputerMove } from './utils/computerPlayer'
+import { BOTS, getBotById } from './utils/bots'
 import './App.css'
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
     gameOver: false,
     winner: null,
     gameMode: 'pvp',
-    difficulty: 'medium',
+    selectedBot: BOTS.random,
     computerPlayer: 'white',
     isComputerThinking: false,
   }))
@@ -65,11 +65,8 @@ function App() {
 
       // Add a small delay to make the computer's move feel more natural
       const timeoutId = setTimeout(() => {
-        const computerMove = getComputerMove(
-          gameState.board,
-          gameState.computerPlayer,
-          gameState.difficulty
-        )
+        const bot = getBotById(gameState.selectedBot.id)
+        const computerMove = bot.getMove(gameState.board, gameState.computerPlayer)
 
         if (computerMove) {
           const [row, col] = computerMove
@@ -95,7 +92,7 @@ function App() {
 
       return () => clearTimeout(timeoutId)
     }
-  }, [gameState.board, gameState.currentPlayer, gameState.computerPlayer, gameState.gameMode, gameState.difficulty])
+  }, [gameState.board, gameState.currentPlayer, gameState.computerPlayer, gameState.gameMode, gameState.selectedBot])
 
   const resetGame = () => {
     const board = createInitialBoard()
@@ -117,8 +114,8 @@ function App() {
     resetGame()
   }
 
-  const handleDifficultyChange = (difficulty: Difficulty) => {
-    setGameState(prev => ({ ...prev, difficulty }))
+  const handleBotChange = (botId: string) => {
+    setGameState(prev => ({ ...prev, selectedBot: BOTS[botId as keyof typeof BOTS] }))
   }
 
   const handleComputerPlayerChange = (player: Player) => {
@@ -131,10 +128,10 @@ function App() {
       <h1>Othello</h1>
       <GameSettings
         gameMode={gameState.gameMode}
-        difficulty={gameState.difficulty}
+        selectedBot={gameState.selectedBot}
         computerPlayer={gameState.computerPlayer}
         onGameModeChange={handleGameModeChange}
-        onDifficultyChange={handleDifficultyChange}
+        onBotChange={handleBotChange}
         onComputerPlayerChange={handleComputerPlayerChange}
       />
       <div className="game-info">

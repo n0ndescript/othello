@@ -1,22 +1,23 @@
 import React from 'react';
-import { GameMode, Difficulty, Player } from '../types/game';
+import { GameMode, Player } from '../types/game';
+import { BOTS } from '../utils/bots';
 import './GameSettings.css';
 
 interface GameSettingsProps {
   gameMode: GameMode;
-  difficulty: Difficulty;
+  selectedBot: typeof BOTS[keyof typeof BOTS];
   computerPlayer: Player;
   onGameModeChange: (mode: GameMode) => void;
-  onDifficultyChange: (difficulty: Difficulty) => void;
+  onBotChange: (botId: string) => void;
   onComputerPlayerChange: (player: Player) => void;
 }
 
 export const GameSettings: React.FC<GameSettingsProps> = ({
   gameMode,
-  difficulty,
+  selectedBot,
   computerPlayer,
   onGameModeChange,
-  onDifficultyChange,
+  onBotChange,
   onComputerPlayerChange,
 }) => {
   return (
@@ -32,12 +33,15 @@ export const GameSettings: React.FC<GameSettingsProps> = ({
       {gameMode === 'pvc' && (
         <>
           <div className="setting-group">
-            <label>Difficulty:</label>
-            <select value={difficulty} onChange={(e) => onDifficultyChange(e.target.value as Difficulty)}>
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
+            <label>Select Bot:</label>
+            <select value={selectedBot.id} onChange={(e) => onBotChange(e.target.value)}>
+              {Object.values(BOTS).map((bot) => (
+                <option key={bot.id} value={bot.id}>
+                  {bot.name}
+                </option>
+              ))}
             </select>
+            <div className="bot-description">{selectedBot.description}</div>
           </div>
 
           <div className="setting-group">
