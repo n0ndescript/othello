@@ -1,54 +1,87 @@
 .game-settings {
-  margin-bottom: 2rem;
-  padding: 1rem;
+  margin: 20px 0;
+  padding: 20px;
   background-color: #f5f5f5;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.setting-group {
-  margin: 1rem 0;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.setting-group label {
-  min-width: 120px;
-  font-weight: bold;
+.game-settings h2 {
+  margin: 0 0 20px 0;
   color: #333;
 }
 
-.setting-group select {
-  padding: 0.5rem;
+.settings-group {
+  margin-bottom: 20px;
+}
+
+.settings-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #444;
+}
+
+.settings-group select {
+  width: 100%;
+  padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   background-color: white;
-  font-size: 1rem;
-  cursor: pointer;
-  min-width: 200px;
-  appearance: menulist;
-  -webkit-appearance: menulist-button;
-  -moz-appearance: menulist;
-  height: 38px;
-  line-height: 1.5;
-  color: #333;
+  font-size: 14px;
+  margin-top: 4px;
 }
 
-.setting-group select:hover {
-  border-color: #666;
-}
-
-.setting-group select:focus {
+.settings-group select:focus {
   outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
 }
 
 .bot-description {
-  flex: 1;
-  font-size: 0.9rem;
+  margin-top: 8px;
+  padding: 8px;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  font-size: 14px;
   color: #666;
   font-style: italic;
-  margin-left: 1rem;
+}
+
+.game-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.game-controls button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.game-controls button:first-child {
+  background-color: #007bff;
+  color: white;
+}
+
+.game-controls button:first-child:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.game-controls button:first-child:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.game-controls button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+
+.game-controls button:last-child:hover {
+  background-color: #c82333;
 } 
