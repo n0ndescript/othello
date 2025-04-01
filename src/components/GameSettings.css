@@ -27,6 +27,12 @@
   font-size: 1rem;
   cursor: pointer;
   min-width: 200px;
+  appearance: menulist;
+  -webkit-appearance: menulist-button;
+  -moz-appearance: menulist;
+  height: 38px;
+  line-height: 1.5;
+  color: #333;
 }
 
 .setting-group select:hover {

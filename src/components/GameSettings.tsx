@@ -24,7 +24,16 @@ export const GameSettings: React.FC<GameSettingsProps> = ({
     <div className="game-settings">
       <div className="setting-group">
         <label>Game Mode:</label>
-        <select value={gameMode} onChange={(e) => onGameModeChange(e.target.value as GameMode)}>
+        <select 
+          defaultValue={gameMode}
+          onChange={(e) => {
+            const newMode = e.target.value;
+            if (newMode === 'pvp' || newMode === 'pvc') {
+              onGameModeChange(newMode);
+            }
+          }}
+        >
+          <option value="">Select Game Mode</option>
           <option value="pvp">Player vs Player</option>
           <option value="pvc">Player vs Computer</option>
         </select>
