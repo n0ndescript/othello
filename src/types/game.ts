@@ -4,7 +4,7 @@ export type Player = 'black' | 'white';
 export type Cell = Player | null;
 export type Board = Cell[][];
 export type Position = [number, number];
-export type GameMode = 'pvp' | 'pvc';
+export type GameMode = 'pvp' | 'pvc' | 'cvc';
 
 export interface GameState {
   board: Board;
@@ -16,5 +16,6 @@ export interface GameState {
   gameMode: GameMode;
   selectedBot: BotConfig;
   computerPlayer: Player;
+  secondBot?: BotConfig;  // For computer vs computer mode
   isComputerThinking: boolean;
 } 
